@@ -1,0 +1,2 @@
+Deploy trigger for Cloudflare Pages.
+Last trigger: 2026-06-12T13:38:00+02:00
