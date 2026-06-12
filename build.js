@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 
-const partsDir = path.join(__dirname, 'worker-gzip');
+const partsDir = path.join(__dirname, 'worker-gzip-v2');
 const parts = fs
   .readdirSync(partsDir)
   .filter((file) => file.startsWith('part-') && file.endsWith('.txt'))
