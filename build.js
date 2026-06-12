@@ -16,10 +16,12 @@ const workerGzipBase64 = parts
   .map((file) => fs.readFileSync(path.join(partsDir, file), 'utf8').trim())
   .join('');
 
+const workerSource = zlib
+  .gunzipSync(Buffer.from(workerGzipBase64, 'base64'))
+  .toString('utf8')
+  .replace('path.replace(//$/, "")', 'path.replace(/\\/$/, "")');
+
 fs.mkdirSync('dist', { recursive: true });
-fs.writeFileSync(
-  path.join('dist', '_worker.js'),
-  zlib.gunzipSync(Buffer.from(workerGzipBase64, 'base64')),
-);
+fs.writeFileSync(path.join('dist', '_worker.js'), workerSource);
 
 console.log(`Built dist/_worker.js from ${parts.length} worker parts`);
