@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 
-const partsDir = path.join(__dirname, 'worker-gzip-v2');
+const partsDir = path.join(__dirname, 'worker-gzip-v3');
 const parts = fs
   .readdirSync(partsDir)
   .filter((file) => file.startsWith('part-') && file.endsWith('.txt'))
@@ -18,8 +18,7 @@ const workerGzipBase64 = parts
 
 const workerSource = zlib
   .gunzipSync(Buffer.from(workerGzipBase64, 'base64'))
-  .toString('utf8')
-  .replace('path.replace(//$/, "")', 'path.replace(/\\/$/, "")');
+  .toString('utf8');
 
 fs.mkdirSync('dist', { recursive: true });
 fs.writeFileSync(path.join('dist', '_worker.js'), workerSource);
