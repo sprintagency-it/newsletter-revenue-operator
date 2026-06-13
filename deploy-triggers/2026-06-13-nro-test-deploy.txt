@@ -1,3 +1,0 @@
-Trigger production deployment for Newsletter Revenue Operator test bundle.
-Date: 2026-06-13
-Bundle commit: 17ab38dd860848fa00b66fa6a4e1cfaec550bd1e

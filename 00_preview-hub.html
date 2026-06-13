@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>NRO Local Preview Hub</title>
+    <style>
+      :root {
+        --paper: #fbfaf7;
+        --ink: #171512;
+        --muted: #6a6258;
+        --line: #ded7cc;
+        --yellow: #f4c95d;
+        --green: #11735b;
+        --radius: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          linear-gradient(rgba(31, 94, 255, 0.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(31, 94, 255, 0.045) 1px, transparent 1px),
+          var(--paper);
+        background-size: 28px 28px;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      main {
+        width: min(1040px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 56px 0;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 18px;
+        padding: 8px 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.7);
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--green);
+      }
+
+      h1 {
+        max-width: 760px;
+        margin: 0 0 12px;
+        font-size: clamp(42px, 7vw, 76px);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 740px;
+        margin: 0 0 34px;
+        color: var(--muted);
+        font-size: 19px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .card {
+        min-height: 190px;
+        padding: 20px;
+        border: 2px solid var(--ink);
+        border-radius: var(--radius);
+        background:
+          linear-gradient(rgba(31, 94, 255, 0.045) 1px, transparent 1px),
+          #fffdf8;
+        background-size: 100% 28px;
+        box-shadow: 5px 5px 0 rgba(23, 21, 18, 0.14);
+        text-decoration: none;
+        color: inherit;
+        transition: transform 160ms ease, box-shadow 160ms ease;
+      }
+
+      .card:hover,
+      .card:focus-visible {
+        transform: translate(2px, 2px);
+        box-shadow: 3px 3px 0 rgba(23, 21, 18, 0.14);
+      }
+
+      .card strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 21px;
+        line-height: 1.1;
+      }
+
+      .card span {
+        color: var(--muted);
+      }
+
+      .badge {
+        display: inline-flex;
+        margin-bottom: 14px;
+        padding: 5px 8px;
+        border: 1px solid var(--ink);
+        border-radius: 999px;
+        background: var(--yellow);
+        font-size: 11px;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .note {
+        margin-top: 26px;
+        padding: 16px 18px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.76);
+        color: var(--muted);
+      }
+
+      code {
+        color: var(--ink);
+        font-weight: 800;
+      }
+
+      @media (max-width: 820px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">Local review links</div>
+      <h1>NRO Preview Hub</h1>
+      <p class="lead">Open these local pages for browser comments before pushing the next version live. These links point to the files in this folder, so they show your unpublished edits.</p>
+
+      <div class="grid">
+        <a class="card" href="index.html">
+          <span class="badge">Main</span>
+          <strong>Landing page</strong>
+          <span>Homepage, hero, FAQ, cookie banner and footer.</span>
+        </a>
+
+        <a class="card" href="newsletter-revenue-system/">
+          <span class="badge">SEO</span>
+          <strong>Newsletter system guide</strong>
+          <span>Indexable source page for organic search and AI answer engines.</span>
+        </a>
+
+        <a class="card" href="thank-you.html">
+          <span class="badge">Lead</span>
+          <strong>Thank-you page</strong>
+          <span>Post-intake page with beta pack upsell.</span>
+        </a>
+
+        <a class="card" href="checkout/start/">
+          <span class="badge">Checkout</span>
+          <strong>Checkout start</strong>
+          <span>Billing country and buyer type pre-check.</span>
+        </a>
+
+        <a class="card" href="checkout/success/?session_id=cs_test_preview">
+          <span class="badge">Purchase</span>
+          <strong>Checkout success</strong>
+          <span>Payment received page with intake form handoff.</span>
+        </a>
+
+        <a class="card" href="privacy-policy/">
+          <span class="badge">Legal</span>
+          <strong>Privacy Policy</strong>
+          <span>Controller, data usage, processors and rights.</span>
+        </a>
+
+        <a class="card" href="cookie-policy/">
+          <span class="badge">Legal</span>
+          <strong>Cookie Policy</strong>
+          <span>Cookie categories, Meta Pixel and consent details.</span>
+        </a>
+      </div>
+
+      <div class="note">
+        If a page opens as source code instead of preview, open this hub in the in-app browser as a file URL and use the cards from here. This hub is for local review only and includes a noindex directive in case it is deployed accidentally. The local file should be:
+        <br>
+        <code>file:///Users/lorenzo/Documents/AI%20OS/60_Active_Projects/10_lorenzo-projects/newsletter-revenue-operator/landing-v0/00_preview-hub.html</code>
+      </div>
+    </main>
+  </body>
+</html>

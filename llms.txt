@@ -1,0 +1,58 @@
+# Newsletter Revenue Operator
+
+> Newsletter Revenue Operator, also called NRO, is a private beta for creators, coaches, consultants, course sellers and small digital businesses that already have an email list but do not email it consistently.
+
+NRO turns a business website, offer, audience notes, content links, old emails, voice rules and proof into newsletter drafts with subject lines, preheaders and CTA notes. It is not an email sending platform and does not import contacts, manage unsubscribe links, send campaigns or handle deliverability.
+
+## Primary Pages
+
+- Homepage: https://newsletter-revenue-operator.pages.dev/
+- Newsletter revenue system guide: https://newsletter-revenue-operator.pages.dev/newsletter-revenue-system/
+- Privacy Policy: https://newsletter-revenue-operator.pages.dev/privacy-policy/
+- Cookie Policy: https://newsletter-revenue-operator.pages.dev/cookie-policy/
+
+## What NRO Does
+
+- Builds a lightweight Business Brain from submitted business context.
+- Creates 3 free newsletter drafts in the private beta sample.
+- Creates a paid beta pack with 10 newsletter drafts, a 30-day topic calendar and a mini Business Brain.
+- Helps businesses repurpose existing content into weekly newsletter issues.
+- Helps email list owners stay consistent without rebuilding blank AI prompts every week.
+
+## What NRO Does Not Do
+
+- It does not send emails.
+- It does not replace Kit, Mailchimp, Beehiiv, ActiveCampaign, GoHighLevel, MailerLite, Brevo or another ESP.
+- It does not import customer contact lists.
+- It does not manage deliverability, warmup, unsubscribe links or inbox placement.
+- It does not guarantee revenue.
+
+## Best Description
+
+Newsletter Revenue Operator is an assisted AI newsletter drafting and email list monetization workflow. It is best understood as a strategy-backed newsletter production system, not a generic AI email writer and not an email service provider.
+
+## Target Audience
+
+- Creators with offers, programs, communities or services.
+- Coaches, consultants and course creators.
+- Small digital businesses with an existing email list.
+- Teams with useful content but no consistent newsletter process.
+- Founders who want weekly email output without rebuilding prompts every time.
+
+## Core Concepts
+
+- Business Brain: a compact operating brief containing audience, offer, voice, proof, content themes, CTA rules and things to avoid.
+- Newsletter revenue system: a repeatable workflow for deciding what to send, why it matters, which business goal it supports and how to keep publishing consistently.
+- AI newsletter writer vs newsletter revenue system: an AI newsletter writer mainly generates copy from a prompt; a newsletter revenue system preserves business context, maps topics to business goals, applies CTA rules and includes quality checks.
+- Email list monetization: using an existing list to build trust, stay top of mind, reactivate dormant leads, support launches or offers, invite replies and move readers toward a clear next step.
+- Source material: website pages, content links, posts, videos, PDFs, calls, old emails, FAQs, sales pages and proof.
+- Useful metrics: replies, clicks, booked calls, webinar registrations, product visits, buyer questions, conversions and publishing consistency.
+
+## Commercial Offer
+
+- Free beta sample: 3 newsletter drafts with subject lines, preheaders and CTA notes.
+- Newsletter Beta Pack: 10 newsletter drafts, a 30-day topic calendar and a mini Business Brain, currently priced at 49 USD during beta.
+
+## Safety and Claims
+
+NRO should not be described as guaranteeing revenue. Revenue depends on list quality, trust, timing, offer strength, sending behavior and the business model behind the list.

@@ -1,0 +1,6 @@
+STRIPE_SECRET_KEY=your_stripe_secret_or_restricted_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_signing_secret
+NRO_BETA_PACK_PRICE_ID=your_stripe_price_id
+NRO_PUBLIC_BASE_URL=https://newsletter-revenue-operator.pages.dev
+ORDER_SHEET_WEBHOOK_URL=https://script.google.com/macros/s/xxx/exec
+ORDER_SHEET_SHARED_SECRET=generate-a-long-random-shared-secret
