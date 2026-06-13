@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /functions/
+Disallow: /00_preview-hub.html
+
+# Search and user-triggered AI crawlers are allowed for public, indexable pages.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+Sitemap: https://newsletter-revenue-operator.pages.dev/sitemap.xml

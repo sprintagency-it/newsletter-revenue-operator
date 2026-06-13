@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="NRO">
+  <rect x="8" y="8" width="80" height="80" rx="14" fill="#f4c95d"/>
+  <rect x="8" y="8" width="80" height="80" rx="14" fill="none" stroke="#171512" stroke-width="6"/>
+  <text x="48" y="56" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="900" fill="#171512">NRO</text>
+</svg>
