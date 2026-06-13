@@ -116,7 +116,13 @@ export async function onRequestPost({ request, env }) {
     return json({ error: "Checkout is not configured yet." }, 503);
   }
 
-  const form = await request.formData();
+  let form;
+  try {
+    form = await request.formData();
+  } catch {
+    return json({ error: "Submit the checkout form again." }, 400);
+  }
+
   const country = normalizeCountry(form.get("billingCountry"));
   const buyerType = String(form.get("buyerType") || "").trim();
 
