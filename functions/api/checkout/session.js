@@ -9,6 +9,14 @@ import {
 
 const STRIPE_API_VERSION = "2026-02-25.clover";
 
+function getEnv(env, ...names) {
+  for (const name of names) {
+    const value = env[name];
+    if (value) return value;
+  }
+  return "";
+}
+
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
@@ -30,11 +38,11 @@ function encodeForm(params) {
   return body;
 }
 
-async function stripePost(env, path, params) {
+async function stripePost(stripeSecretKey, path, params) {
   const response = await fetch(`https://api.stripe.com${path}`, {
     method: "POST",
     headers: {
-      "authorization": `Bearer ${env.STRIPE_SECRET_KEY}`,
+      "authorization": `Bearer ${stripeSecretKey}`,
       "content-type": "application/x-www-form-urlencoded",
       "stripe-version": STRIPE_API_VERSION
     },
@@ -52,7 +60,7 @@ async function stripePost(env, path, params) {
 
 function getBaseUrl(request, env) {
   const fallback = new URL(request.url).origin;
-  return String(env.NRO_PUBLIC_BASE_URL || fallback).replace(/\/$/, "");
+  return String(getEnv(env, "NRO_PUBLIC_BASE_URL", "NRO-PUBLIC-BASE-URL") || fallback).replace(/\/$/, "");
 }
 
 function buildCheckoutParams({ customerId, priceId, baseUrl, country, buyerType, invoiceCase }) {
@@ -101,7 +109,10 @@ function buildCheckoutParams({ customerId, priceId, baseUrl, country, buyerType,
 }
 
 export async function onRequestPost({ request, env }) {
-  if (!env.STRIPE_SECRET_KEY || !env.NRO_BETA_PACK_PRICE_ID) {
+  const stripeSecretKey = getEnv(env, "STRIPE_SECRET_KEY", "STRIPE-SECRET-KEY");
+  const priceId = getEnv(env, "NRO_BETA_PACK_PRICE_ID", "NRO-BETA-PACK-PRICE-ID");
+
+  if (!stripeSecretKey || !priceId) {
     return json({ error: "Checkout is not configured yet." }, 503);
   }
 
@@ -120,7 +131,7 @@ export async function onRequestPost({ request, env }) {
   const invoiceCase = classifyPreliminary(country, buyerType);
 
   try {
-    const customer = await stripePost(env, "/v1/customers", {
+    const customer = await stripePost(stripeSecretKey, "/v1/customers", {
       "metadata[fiscal_model]": "consulting_email_marketing",
       "metadata[billing_country_preselected]": country,
       "metadata[buyer_type_preselected]": buyerType,
@@ -128,9 +139,9 @@ export async function onRequestPost({ request, env }) {
       "metadata[ask_sdi_pec]": "false"
     });
 
-    const session = await stripePost(env, "/v1/checkout/sessions", buildCheckoutParams({
+    const session = await stripePost(stripeSecretKey, "/v1/checkout/sessions", buildCheckoutParams({
       customerId: customer.id,
-      priceId: env.NRO_BETA_PACK_PRICE_ID,
+      priceId,
       baseUrl: getBaseUrl(request, env),
       country,
       buyerType,

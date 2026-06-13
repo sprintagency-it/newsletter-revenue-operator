@@ -8,6 +8,14 @@ import {
 
 const STRIPE_API_VERSION = "2026-02-25.clover";
 
+function getEnv(env, ...names) {
+  for (const name of names) {
+    const value = env[name];
+    if (value) return value;
+  }
+  return "";
+}
+
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
@@ -58,7 +66,7 @@ async function verifyStripeSignature(rawBody, signatureHeader, webhookSecret) {
   return signatures.some((signature) => timingSafeEqual(signature, expected));
 }
 
-async function stripeGet(env, path, query = {}) {
+async function stripeGet(stripeSecretKey, path, query = {}) {
   const url = new URL(`https://api.stripe.com${path}`);
   for (const [key, value] of Object.entries(query)) {
     if (Array.isArray(value)) {
@@ -70,7 +78,7 @@ async function stripeGet(env, path, query = {}) {
 
   const response = await fetch(url.toString(), {
     headers: {
-      authorization: `Bearer ${env.STRIPE_SECRET_KEY}`,
+      authorization: `Bearer ${stripeSecretKey}`,
       "stripe-version": STRIPE_API_VERSION
     }
   });
@@ -127,16 +135,19 @@ function buildPaidOrder(session) {
 }
 
 async function sendToOrderSheet(env, row, order) {
-  if (!env.ORDER_SHEET_WEBHOOK_URL || !env.ORDER_SHEET_SHARED_SECRET) {
+  const sheetWebhookUrl = getEnv(env, "ORDER_SHEET_WEBHOOK_URL", "ORDER-SHEET-WEBHOOK-URL");
+  const sheetSharedSecret = getEnv(env, "ORDER_SHEET_SHARED_SECRET", "ORDER-SHEET-SHARED-SECRET");
+
+  if (!sheetWebhookUrl || !sheetSharedSecret) {
     console.warn("Order sheet webhook is not configured. Skipping Sheet sync.");
     return { skipped: true };
   }
 
-  const response = await fetch(env.ORDER_SHEET_WEBHOOK_URL, {
+  const response = await fetch(sheetWebhookUrl, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({
-      secret: env.ORDER_SHEET_SHARED_SECRET,
+      secret: sheetSharedSecret,
       row,
       order
     })
@@ -155,13 +166,16 @@ async function sendToOrderSheet(env, row, order) {
 }
 
 export async function onRequestPost({ request, env }) {
-  if (!env.STRIPE_SECRET_KEY || !env.STRIPE_WEBHOOK_SECRET) {
+  const stripeSecretKey = getEnv(env, "STRIPE_SECRET_KEY", "STRIPE-SECRET-KEY");
+  const stripeWebhookSecret = getEnv(env, "STRIPE_WEBHOOK_SECRET", "STRIPE-WEBHOOK-SECRET");
+
+  if (!stripeSecretKey || !stripeWebhookSecret) {
     return json({ error: "Webhook is not configured yet." }, 503);
   }
 
   const rawBody = await request.text();
   const signature = request.headers.get("stripe-signature");
-  const verified = await verifyStripeSignature(rawBody, signature, env.STRIPE_WEBHOOK_SECRET);
+  const verified = await verifyStripeSignature(rawBody, signature, stripeWebhookSecret);
   if (!verified) {
     return json({ error: "Invalid Stripe signature." }, 400);
   }
@@ -176,7 +190,7 @@ export async function onRequestPost({ request, env }) {
     return json({ error: "Missing checkout session." }, 400);
   }
 
-  const session = await stripeGet(env, `/v1/checkout/sessions/${eventSession.id}`, {
+  const session = await stripeGet(stripeSecretKey, `/v1/checkout/sessions/${eventSession.id}`, {
     "expand[]": ["customer", "payment_intent", "line_items"]
   });
 
